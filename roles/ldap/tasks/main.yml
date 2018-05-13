@@ -23,7 +23,7 @@
   expect:
     command: realm join --user=admin example.com
     responses:
-      Password for admin.nz: "{{ldap_password}}"
+      Password for admin: "{{ldap_password}}"
   register: realm
   # Due to YAML limitations, had to separate this check in 2 parts
   failed_when: "'Couldn' in realm.stdout and 't join realm' in realm.stdout"
