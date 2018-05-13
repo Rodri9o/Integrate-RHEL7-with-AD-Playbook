@@ -14,7 +14,13 @@
     - samba-common-tools
     - sssd
 
-- name: Install pexpect
+- name: Update resolv config
+  copy:
+    dest: /etc/resolv.conf
+    src: resolv.conf
+    backup: yes
+    
+- name: Install pexpect for expect module
   pip:
     name: pexpect
     state: present
