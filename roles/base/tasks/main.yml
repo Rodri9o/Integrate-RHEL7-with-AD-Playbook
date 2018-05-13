@@ -123,6 +123,12 @@
   tags:
     - iptables
 
+- name: Execute ntpdate runs
+  command: "ntpdate {{ dc_domain }}"
+  notify: restart-ntpd
+  tags:
+    - ntp
+
 - name: Disable Root login
   lineinfile: 'dest=/etc/ssh/sshd_config regexp="^[^\"]PermitRootLogin.*$" line="PermitRootLogin without-password" state=present backup=yes'
   notify: restart-sshd

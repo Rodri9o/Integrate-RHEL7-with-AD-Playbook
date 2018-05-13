@@ -2,6 +2,9 @@
 ---
 
 ### RESTART/RELOAD ###
+- name: restart-ntpd
+  service: name=ntpd state=restarted enabled=yes
+  
 - name: restart-iptables
   service: name=iptables state=restarted enabled=yes
 

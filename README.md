@@ -6,6 +6,6 @@ Most of the Organizations users and groups are created and managed on Windows Ac
 ansible-playbook site.yml -i hosts -u root
 
 ### Playbook Roles
-- base: to install basic packages, iptables and protect grub
+- base: to install basic packages, ntp, iptables and protect grub
 - common: has all global variables and handlers
-- ldap: main role of the playbook to install sssd, realmd and dependency packages for joining AD
+- ldap: main role of the playbook to install samba, sssd, realmd and dependency packages for joining AD
