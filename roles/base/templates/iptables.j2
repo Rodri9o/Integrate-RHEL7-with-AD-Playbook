@@ -1,0 +1,49 @@
+# {{ansible_managed}}
+
+*mangle
+COMMIT
+
+*nat
+COMMIT
+
+# DEFAULT ALL CHAINS TO ACCEPT ON FALLTHROUGH
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+
+:RPORTS - [0:0]
+[0:0] -A RPORTS -p tcp -m tcp --dport 22 -j ACCEPT
+
+# Add ports number that need to be open
+[0:0] -A RPORTS -p tcp -m tcp --dport <port_no> -j ACCEPT
+
+# Allow ping
+[0:0] -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+# Allow localhost full access
+[0:0] -A INPUT -i lo -j ACCEPT
+
+# Allows Connected traffic though
+[0:0] -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Add servers IPs that are allowed to access
+[0:0] -A INPUT -s <ip> -j RPORTS
+
+# Block
+[0:0] -A INPUT -p tcp -m tcp --dport 22 -j DROP
+[0:0] -A INPUT -p udp -m udp --dport 22 -j DROP
+[0:0] -A INPUT -p tcp -m tcp --dport 111 -j DROP
+[0:0] -A INPUT -p udp -m udp --dport 111 -j DROP
+[0:0] -A INPUT -p tcp -m tcp --dport 3000 -j DROP
+[0:0] -A INPUT -p udp -m udp --dport 3000 -j DROP
+[0:0] -A INPUT -p tcp -m tcp --dport 3013 -j DROP
+[0:0] -A INPUT -p udp -m udp --dport 3013 -j DROP
+[0:0] -A INPUT -p tcp -m tcp --dport 9999 -j DROP
+[0:0] -A INPUT -p udp -m udp --dport 9999 -j DROP
+
+# Drop Everything else
+[0:0] -A INPUT -j DROP
+####################################################################
+
+COMMIT

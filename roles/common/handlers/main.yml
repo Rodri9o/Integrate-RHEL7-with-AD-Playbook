@@ -1,0 +1,16 @@
+# Keep the handlers in alphabetical order within their categories.
+---
+
+### RESTART/RELOAD ###
+- name: restart-iptables
+  service: name=iptables state=restarted enabled=yes
+
+- name: restart-sshd
+  service: name=sshd state=restarted
+
+- name: restart-sssd
+  service: name=sssd state=restarted
+
+### SCRIPTS ###
+- name: update-grub
+  shell: "grub2-mkconfig --output=/boot/grub2/grub.cfg"

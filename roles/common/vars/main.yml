@@ -1,0 +1,3 @@
+---
+ldap_server: example.com
+ldap_basedn: OU=,DC=,DC=

@@ -1,0 +1,11 @@
+---
+- name: Base setup
+  hosts:
+    - centos
+  user: root
+  connection: ssh
+  gather_facts: yes
+  roles:
+    - common
+    - base
+    - ldap
